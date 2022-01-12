@@ -39,15 +39,17 @@ class AuthController extends Controller
         if (!Auth::attempt($request->only('email', 'password')))
         {
             return response()
-                ->json(['message' => 'Unauthorized'], 401);
+                ->json(['message' => 'Acesso não permitido'], 401);
         }
 
         $user = User::where('email', $request['email'])->firstOrFail();
-
-        $token = $user->createToken('auth_token')->plainTextToken;
-
-        return response()
+        if($user->permission == 1){
+            $token = $user->createToken('auth_token')->plainTextToken;
+            return response()
             ->json(['message' => 'Hi '.$user->email.', welcome to home','token' => $token, 'token_type' => 'Bearer', ]);
+        }
+        return response()
+        ->json(['message' => 'Acesso não permitido'], 401);
     }
 
     // method for user logout and delete token
