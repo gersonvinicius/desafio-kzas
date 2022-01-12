@@ -43,6 +43,12 @@ Então inicie o servidor
 php artisan serve
 ```
 
+As urls da api do laravel estão configuradas para o prefixo:
+```bash
+http://127.0.0.1:8000/
+```
+Para o bom funcionamento do projeto adicione em seu .env APP_URL=http://127.0.0.1:8000
+
 ### VueJS
 Entre na pasta do projeto e depois vá na pasta front-end, realize a instalação das dependências.
 ```bash
